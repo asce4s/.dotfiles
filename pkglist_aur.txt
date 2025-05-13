@@ -23,5 +23,3 @@ visual-studio-code-bin
 wallust
 wlogout
 xwaylandvideobridge
-zsh-history-substring-search-git
-zsh-nix-shell
