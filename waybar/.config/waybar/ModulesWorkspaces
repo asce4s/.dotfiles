@@ -8,7 +8,7 @@
 // CIRCLES Style
 "hyprland/workspaces": {
 	"active-only": false,
-	"all-outputs": true,
+	"all-outputs": false,
 	"format": "{icon}",
 	"show-special": false,
 	"on-click": "activate",
@@ -19,7 +19,10 @@
 	},
 	"format-icons": {
 		"active": "",
-		"default": "",
+		"default": "", 
+    "urgent": "",
+      "visible": "", // focused workspace on other monitors
+      "empty": "" // persistent (created by this plugin)
 	},
 },
 // ROMAN Numerals style
@@ -168,7 +171,7 @@
 // NUMBERS and ICONS style with window rewrite 
 "hyprland/workspaces#rw": {
 	"disable-scroll": true,
-	"all-outputs": true,
+	"all-outputs": false,
 	"warp-on-scroll": false,
 	"sort-by-number": true,
 	"show-special": false,
