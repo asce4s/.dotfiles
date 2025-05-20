@@ -3,9 +3,24 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		--	"hrsh7th/cmp-nvim-lsp",
-		{ "saghen/blink.cmp" },
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
+		{
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = {
+				library = {
+					-- See the configuration section for more details
+					-- Load luvit types when the `vim.uv` word is found
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				},
+			},
+			dependdencies = {
+				{
+					"saghen/blink.cmp",
+					opts = { sources = { default = { "lazydev" } } },
+				},
+			},
+		},
 	},
 	opts = {
 		servers = {
@@ -62,10 +77,14 @@ return {
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts_l) -- show diagnostics for line
 
 				opts_l.desc = "Go to previous diagnostic"
-				keymap.set("n", "[d", vim.diagnostic.goto_prev, opts_l) -- jump to previous diagnostic in buffer
+				keymap.set("n", "[d", function()
+					vim.diagnostic.jump({ count = -1, float = true })
+				end) -- jump to previous diagnostic in buffer
 
 				opts_l.desc = "Go to next diagnostic"
-				keymap.set("n", "]d", vim.diagnostic.goto_next, opts_l) -- jump to next diagnostic in buffer
+				keymap.set("n", "]d", function()
+					vim.diagnostic.jump({ count = 1, float = true })
+				end) -- jump to next diagnostic in buffer
 
 				opts_l.desc = "Show documentation for what is under cursor"
 				keymap.set("n", "K", vim.lsp.buf.hover, opts_l) -- show documentation for what is under cursor
@@ -75,13 +94,6 @@ return {
 			end,
 		})
 
-		-- used to enable autocompletion (assign to every lsp server config)
-
-		-- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		-- for type, icon in pairs(signs) do
-		-- 	local hl = "DiagnosticSign" .. type
-		-- 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		-- end
 		vim.diagnostic.config({
 			signs = {
 				text = {
