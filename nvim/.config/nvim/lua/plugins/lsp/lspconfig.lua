@@ -2,7 +2,8 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		--	"hrsh7th/cmp-nvim-lsp",
+		-- "hrsh7th/nvim-cmp", -- Core completion engine (Reverted)
+		-- "hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp (Reverted)
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{
 			"folke/lazydev.nvim",
@@ -14,7 +15,7 @@ return {
 					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 				},
 			},
-			dependdencies = {
+			dependencies = {
 				{
 					"saghen/blink.cmp",
 					opts = { sources = { default = { "lazydev" } } },
@@ -24,21 +25,45 @@ return {
 	},
 	opts = {
 		servers = {
-			lua_ls = {},
-			ts_ls = {},
+			lua_ls = {
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
+					},
+				},
+			},
+			tsserver = {}, 
+			html = {},
+			cssls = {},
+			tailwindcss = {},
+			graphql = {},
+			emmet_ls = {},
+			prismals = {},
+			pyright = {},
 		},
 	},
 	config = function(_, opts)
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
-		lspconfig.lua_ls.setup({ settings = { diagnostics = { globals = { "vim" } } } })
 		local keymap = vim.keymap -- for conciseness
 
-		for server, config in pairs(opts.servers) do
-			-- passing config.capabilities to blink.cmp merges with the capabilities in your
-			-- `opts[server].capabilities, if you've defined it
-			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-			lspconfig[server].setup(config)
+		-- import lspconfig plugin
+		local lspconfig = require("lspconfig")
+		local keymap = vim.keymap -- for conciseness
+
+		for server_name, server_config in pairs(opts.servers) do
+			-- Ensure server_config is a table if it's coming from opts.servers
+			local current_config = type(server_config) == "table" and server_config or {}
+			-- Assign blink.cmp capabilities
+			current_config.capabilities = require("blink.cmp").get_lsp_capabilities(current_config.capabilities)
+			
+			if lspconfig[server_name] and lspconfig[server_name].setup then
+				lspconfig[server_name].setup(current_config)
+			else
+				vim.notify("LSP server '" .. server_name .. "' not found in lspconfig. Skipping setup.", vim.log.levels.WARN)
+			end
 		end
 
 		vim.api.nvim_create_autocmd("LspAttach", {
