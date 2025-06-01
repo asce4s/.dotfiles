@@ -11,7 +11,7 @@ return {
 			"graphql",
 			"emmet_ls",
 			"prismals",
-			"tsserver", -- Matches lspconfig.lua and mason's package name for typescript-language-server
+			"ts_ls", -- Matches lspconfig.lua and mason's package name for typescript-language-server
 			"pyright",
 		},
 		automatic_installation = true, -- Enabled automatic server installation

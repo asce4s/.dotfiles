@@ -137,5 +137,5 @@ export PATH="$NVMD_DIR/bin:$HOME/.nix-profile/bin:$PATH"
 
 # NIX path
 #
-
+eval "$(zellij setup --generate-auto-start zsh)"
 eval "$(starship init zsh)"
