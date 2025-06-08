@@ -52,6 +52,22 @@ return {
 		local lspconfig = require("lspconfig")
 		local keymap = vim.keymap -- for conciseness
 
+		lspconfig.gopls.setup({
+			settings = {
+				gopls = {
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
+					},
+				},
+			},
+		})
+
 		for server_name, server_config in pairs(opts.servers) do
 			-- Ensure server_config is a table if it's coming from opts.servers
 			local current_config = type(server_config) == "table" and server_config or {}

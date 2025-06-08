@@ -124,6 +124,9 @@ alias gb='git branch'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 
+if [ -f ~/.scripts/gss.sh ]; then
+    source ~/.scripts/gss.sh
+fi
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
