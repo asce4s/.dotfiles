@@ -126,17 +126,16 @@ alias gcb='git checkout -b'
 
 if [ -f ~/.scripts/gss.sh ]; then
     source ~/.scripts/gss.sh
+    source ~/.scripts/devui.sh
 fi
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 #source /usr/share/zsh/plugins/zsh-nix-shell/nix-shell.plugin.zsh
 source ~/.zsh_plugins.sh
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
-
-export NVMD_DIR="$HOME/.nvmd" 
-export PATH="$NVMD_DIR/bin:$HOME/.nix-profile/bin:$PATH"
+eval "$(fnm env --use-on-cd --shell zsh)"
+# export NVMD_DIR="$HOME/.nvmd" 
+# export PATH="$NVMD_DIR/bin:$HOME/.nix-profile/bin:$PATH"
 
 # NIX path
 #
