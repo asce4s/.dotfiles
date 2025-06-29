@@ -3,6 +3,7 @@
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# source <(antibody init)
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -104,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+export EOS_YAD_TERMINAL="kitty"
 
 alias ls='eza --icons=always'
 alias ll='eza -l --icons=always'
@@ -127,6 +129,7 @@ alias gcb='git checkout -b'
 if [ -f ~/.scripts/gss.sh ]; then
     source ~/.scripts/gss.sh
     source ~/.scripts/devui.sh
+    source ~/.scripts/killhyper.sh
 fi
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -141,7 +144,7 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 #
 # eval "$(zellij setup --generate-auto-start zsh)"
 
- ZJ_SESSIONS=$(zellij list-sessions)
+# ZJ_SESSIONS=$(zellij list-sessions)
 # NO_SESSIONS=$(echo "${ZJ_SESSIONS}" | wc -l)
 #
 # if [ "${NO_SESSIONS}" -ge 2 ]; then

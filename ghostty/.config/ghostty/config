@@ -2,3 +2,4 @@ command = zsh
 theme = tokyonight_night
 background-opacity = 0.8
 font-family = "JetBrainsMono Nerd Font"
+custom-shader = shaders/cursor_smear_fade.glsl
