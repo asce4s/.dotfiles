@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Git PS Workflow Function
 # Usage: gss [target-branch]
 # Default target branch: dev
 
@@ -74,5 +73,6 @@ gitsync() {
 }
 
 # Create shorter alias
-alias gss='gitsync'
+#alias gss='gitsync'
+gitsync
 

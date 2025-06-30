@@ -114,6 +114,7 @@ alias cd='z'
 alias cat='bat'
 alias vi='nvim'
 alias vim='nvim'
+alias n='nvim .'
 alias lg='lazygit'
 alias g='git'
 alias gs='git status'
@@ -126,11 +127,8 @@ alias gb='git branch'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 
-if [ -f ~/.scripts/gss.sh ]; then
-    source ~/.scripts/gss.sh
-    source ~/.scripts/devui.sh
-    source ~/.scripts/killhyper.sh
-fi
+export PATH="$HOME/.scripts:$PATH"
+bindkey -s ^f "tmux-sessionizer\n"
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -157,3 +155,12 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 
 
 eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="/home/supun/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+#
