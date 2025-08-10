@@ -3,7 +3,12 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/projects ~/.dotfiles -mindepth 1 -maxdepth 3 -type d | fzf)
+   # selected=$(find ~/projects ~/.dotfiles -mindepth 1 -maxdepth 3 -type d | fzf)
+  selected=$(find ~/projects ~/.dotfiles \
+  -mindepth 0 -maxdepth 3 \
+  \( -type d \( -name .git -o -name node_modules \) -prune \) -o \
+  -type d  \
+  | fzf)
 fi
 
 if [[ -z $selected ]]; then

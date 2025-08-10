@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pkill -f firefox-developer-edition
+pkill -f cursor
+pkill -f slack
+
