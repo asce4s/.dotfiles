@@ -95,3 +95,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
+
+-- Folding settings
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- Optional: start with everything unfolded
+vim.o.foldenable = false
+vim.o.foldlevel = 99
