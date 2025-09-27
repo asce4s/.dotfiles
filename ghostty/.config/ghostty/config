@@ -1,5 +1,5 @@
 command = zsh
-theme = tokyonight_night
+theme = TokyoNight Night
 background-opacity = 0.8
 font-family = "JetBrainsMono Nerd Font"
-custom-shader = shaders/cursor_smear_fade.glsl
+custom-shader = ~/.config/ghostty/shaders/cursor_blaze.glsl
