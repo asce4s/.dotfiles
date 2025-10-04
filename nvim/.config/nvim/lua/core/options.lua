@@ -103,3 +103,6 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 -- Optional: start with everything unfolded
 vim.o.foldenable = false
 vim.o.foldlevel = 99
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true

@@ -73,4 +73,4 @@ gitsync() {
 }
 
 # Create shorter alias
-gitsync;
+gitsync $1

@@ -215,7 +215,21 @@ return {
 			--
 			-- But for many setups, the LSP (`ts_ls`) will work just fine
 			ts_ls = {},
-			--
+			
+			-- ESLint language server - provides diagnostics and code actions
+			eslint = {
+				settings = {
+					format = false, -- We use conform.nvim for formatting
+					-- Auto-fix on save is handled by code action on save below
+				},
+				on_attach = function(_, bufnr)
+					-- Auto-fix ESLint errors on save
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = "EslintFixAll",
+					})
+				end,
+			},
 
 			lua_ls = {
 				-- cmd = { ... },
@@ -255,7 +269,15 @@ return {
 		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua", -- Used to format Lua code
+			-- Formatters
+			"stylua", -- Lua
+			"black", -- Python
+			"prettierd", -- JS/TS/JSON/YAML/Markdown/etc
+			"shfmt", -- Shell scripts
+			"biome", -- Modern JS/TS formatter
+			-- Linters
+			"markdownlint", -- Markdown
+			"pylint", -- Python
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
