@@ -71,3 +71,6 @@ vim.keymap.set("n", "n", "nzzz")
 vim.keymap.set("n", "N", "Nzzz")
 
 vim.keymap.set("x", "<leader>p", '"_dP')
+
+vim.keymap.set("i", "jj", "<Esc>", { noremap = false })
+vim.keymap.set("i", "jk", "<Esc>", { noremap = false })
