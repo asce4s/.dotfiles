@@ -64,7 +64,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 
 vim.keymap.set("n", "n", "nzzz")
@@ -74,3 +74,13 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 
 vim.keymap.set("i", "jj", "<Esc>", { noremap = false })
 vim.keymap.set("i", "jk", "<Esc>", { noremap = false })
+
+vim.keymap.set("n", "<A-j>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<A-k>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
+
+vim.keymap.set("n", "<leader>sv", "<cmd>vsplit<CR>", { desc = "Vertical split" })
+vim.keymap.set("n", "<leader>sh", "<cmd>split<CR>", { desc = "Horizontal split" })
+vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close split" })
+vim.keymap.set("n", "<leader>so", "<cmd>only<CR>", { desc = "Close other splits" })
+
+vim.keymap.set("n", "<leader>xe", vim.diagnostic.open_float, { desc = "[E]xpand diagnostic message" })

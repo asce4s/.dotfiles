@@ -69,6 +69,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+		vim.keymap.set("n", "<leader>sa", function()
+			builtin.find_files({ hidden = true, follow = true, no_ignore = true })
+		end, { desc = "[S]earch [A]ll [F]iles" })
 		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
@@ -99,5 +102,39 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "[S]earch [N]eovim files" })
+
+		local function get_visual_selection()
+			local mode = vim.fn.mode()
+			-- Only try the visual-yank approach when actually in visual mode
+			if mode == "v" or mode == "V" or mode == "\22" then
+				-- save unnamed register & type
+				local old_reg = vim.fn.getreg('"')
+				local old_reg_type = vim.fn.getregtype('"')
+
+				-- Yank visual selection into register 'z' (temporary)
+				-- running normal! "zy will yank the current visual selection into "z
+				vim.cmd('normal! "zy')
+
+				local text = vim.fn.getreg("z") or ""
+				-- restore unnamed register so we don't clobber user's last yank
+				vim.fn.setreg('"', old_reg, old_reg_type)
+
+				-- trim trailing newlines that happen when yanking lines
+				text = text:gsub("\n+$", "")
+
+				return text
+			end
+
+			-- fallback: use word under cursor in normal mode
+			return vim.fn.expand("<cword>")
+		end -- Grep for visually selected text
+		vim.keymap.set("v", "<leader>sw", function()
+			local text = get_visual_selection()
+			if not text or text == "" then
+				vim.notify("No text selected", vim.log.levels.WARN)
+				return
+			end
+			builtin.live_grep({ default_text = text })
+		end, { desc = "Search selected text with Telescope" })
 	end,
 }
