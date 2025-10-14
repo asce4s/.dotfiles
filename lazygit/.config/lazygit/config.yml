@@ -5,9 +5,9 @@ customCommands:
     context: "files"
     prompts:
       - type: "menuFromCommand"
-        title: "ai Commits"
+        title: "AI Commits"
         key: "Msg"
-        command: "/home/supun/.dotfiles/lazygit/.config/lazygit/generate-commit.sh"
+        command: "/home/supun/.config/lazygit/generate-commit.sh"
         filter: "^(?P<raw>.+)$"
         valueFormat: "{{ .raw }}"
         labelFormat: "{{ .raw | green }}"
