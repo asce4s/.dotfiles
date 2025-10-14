@@ -7,7 +7,7 @@ customCommands:
       - type: "menuFromCommand"
         title: "AI Commits"
         key: "Msg"
-        command: "/home/supun/.config/lazygit/generate-commit.sh"
+        command: "gencommit"
         filter: "^(?P<raw>.+)$"
         valueFormat: "{{ .raw }}"
         labelFormat: "{{ .raw | green }}"
