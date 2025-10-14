@@ -129,17 +129,9 @@ alias gcb='git checkout -b'
 
 export PATH="$HOME/.scripts:$PATH"
 bindkey -s ^f "tmux-sessionizer\n"
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-#source /usr/share/zsh/plugins/zsh-nix-shell/nix-shell.plugin.zsh
+bindkey -s ^a "tmux-fzf\n"
 source ~/.zsh_plugins.sh
 eval "$(fnm env --use-on-cd --shell zsh)"
-# export NVMD_DIR="$HOME/.nvmd" 
-# export PATH="$NVMD_DIR/bin:$HOME/.nix-profile/bin:$PATH"
-
-# NIX path
-#
 # eval "$(zellij setup --generate-auto-start zsh)"
 
 # ZJ_SESSIONS=$(zellij list-sessions)
@@ -152,15 +144,13 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 #    zellij -s vnasky
 # fi
 
-
-
 eval "$(starship init zsh)"
 
 # pnpm
 export PNPM_HOME="/home/supun/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 #
@@ -172,6 +162,4 @@ esac
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-
 export PATH="$HOME/.local/bin:$PATH"
-
