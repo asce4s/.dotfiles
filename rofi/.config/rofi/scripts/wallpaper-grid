@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+## Wallpaper Grid Picker (Direct)
+
+bash "$HOME/.config/rofi/applets/bin/wallpaper.sh" --grid
+

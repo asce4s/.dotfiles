@@ -214,7 +214,19 @@ return {
 			--    https://github.com/pmizio/typescript-tools.nvim
 			--
 			-- But for many setups, the LSP (`ts_ls`) will work just fine
-			ts_ls = {},
+			-- ts_ls = {},
+			tsgo = {
+				cmd = { "tsgo", "--lsp", "--stdio" },
+				filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+				root_dir = require("lspconfig").util.root_pattern("tsconfig.json", "package.json", ".git"),
+				settings = {
+					-- you may add tsgo / typescript-go specific settings here
+				},
+				on_attach = function(client, bufnr)
+					-- your common on_attach stuff (keymaps etc)
+				end,
+				capabilities = capabilities,
+			},
 
 			-- ESLint language server - provides diagnostics and code actions
 			eslint = {

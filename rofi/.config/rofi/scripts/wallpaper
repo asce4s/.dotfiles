@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+## Wallpaper Picker Script
+
+bash "$HOME/.config/rofi/applets/bin/wallpaper.sh"
+

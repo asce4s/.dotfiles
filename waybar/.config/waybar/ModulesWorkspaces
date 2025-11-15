@@ -8,7 +8,7 @@
 // CIRCLES Style
 "hyprland/workspaces": {
 	"active-only": false,
-	"all-outputs": false,
+	"all-outputs": true,
 	"format": "{icon}",
 	"show-special": false,
 	"on-click": "activate",
@@ -19,10 +19,7 @@
 	},
 	"format-icons": {
 		"active": "",
-		"default": "", 
-    "urgent": "",
-      "visible": "", // focused workspace on other monitors
-      "empty": "" // persistent (created by this plugin)
+		"default": "",
 	},
 },
 // ROMAN Numerals style
@@ -171,7 +168,7 @@
 // NUMBERS and ICONS style with window rewrite 
 "hyprland/workspaces#rw": {
 	"disable-scroll": true,
-	"all-outputs": false,
+	"all-outputs": true,
 	"warp-on-scroll": false,
 	"sort-by-number": true,
 	"show-special": false,
@@ -179,9 +176,7 @@
 	"on-scroll-up": "hyprctl dispatch workspace e+1",
 	"on-scroll-down": "hyprctl dispatch workspace e-1",
 	"persistent-workspaces": {
-	//	"*": 5
-      "HDMI-A-1":[1,2,3,4,5,6],
-      "DP-1":[7,8,9,10],
+		"*": 5
 	  },
 	"format": "{icon} {windows}",
 	"format-window-separator": " ",
@@ -211,7 +206,7 @@
 		"class<[Tt]elegram-desktop|org.telegram.desktop|io.github.tdesktop_x64.TDesktop>": " ",
 		"class<discord|[Ww]ebcord|Vesktop>": " ",
 		"title<.*whatsapp.*>": " ",
-    "title<.*zapzap.*>": " ",
+		"title<.*zapzap.*>": " ",
 		"title<.*messenger.*>": " ",
 		"title<.*facebook.*>": " ",
 		"title<.*reddit.*>": " ",
@@ -231,6 +226,7 @@
 		"class<vlc>": "󰕼 ",
 		"title<.*cmus.*>": " ",
 		"class<[Ss]potify>": " ",
+		"class<Plex>": "󰚺 ",
 
 		"class<virt-manager>": " ",
 		"class<.virt-manager-wrapped>": " ",
@@ -238,8 +234,8 @@
 		"title<virtualbox>": "💽 ",
 		"class<remmina>": "🖥️ ",
 
-		"class<VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium|cursor>": "󰨞 ",
-    "class<dev.zed.Zed>": "󰵁",
+		"class<VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>": "󰨞 ",
+		"class<dev.zed.Zed>": "󰵁",
 		"class<codeblocks>": "󰅩 ",
 		"title<.*github.*>": " ",
 		"class<mousepad>": " ",
@@ -260,13 +256,13 @@
 		"class<[Pp]avucontrol|org.pulseaudio.pavucontrol>": "󱡫 ",
 		"class<steam>": " ",
 		"class<thunar|nemo>": "󰝰 ",	
-    "class<Gparted>":"",
+		"class<Gparted>":"",
 		"class<gimp>": " ",
 		"class<emulator>": "📱 ",
 		"class<android-studio>": " ",
-   	"class<org.pipewire.Helvum>": "󰓃",
-    "class<localsend>":"",
-    "class<PrusaSlicer|UltiMaker-Cura|OrcaSlicer>": "󰹛",
+		"class<org.pipewire.Helvum>": "󰓃",
+		"class<localsend>":"",
+		"class<PrusaSlicer|UltiMaker-Cura|OrcaSlicer>": "󰹛",
 		}
 	},
 }

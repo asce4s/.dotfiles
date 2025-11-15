@@ -9,6 +9,5 @@ PROMPT="Write a conventional commit message for this diff. Format: type(scope): 
 $GIT_DIFF"
 
 # Use cursor-agent -p and extract just the commit message
-cursor-agent -p "$PROMPT" --model "cheetah" | grep -E "^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|config)" | head -1
+cursor-agent -p "$PROMPT" --model "composer-1" | grep -E "^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|config)" | head -1
 # gh copilot suggest -t git "Write a conventional commit message for this diff. Format: type(scope): description. Only output the commit message:: $(git diff --staged)"
-
