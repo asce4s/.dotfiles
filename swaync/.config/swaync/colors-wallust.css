@@ -1,0 +1,326 @@
+/* wallust template - colors-swaync */
+
+@define-color background #26262D;
+@define-color foreground #FEF2DE;
+@define-color color0 #4C4C53;
+@define-color color1 #6E4D5C;
+@define-color color4 #A9766B;
+@define-color color5 #B27C6E;
+@define-color color6 #BDA478;
+@define-color color8 #ACA08B;
+@define-color color9 #93677B;
+@define-color color8-hover rgba(172,160,139, 0.3);
+
+* {
+  all: unset;
+  font-family: JetBrains Mono Nerd Font;
+  transition: 0.3s;
+  font-size: 1.2rem;
+}
+
+.floating-notifications.background .notification-row {
+  padding: 1rem;
+}
+
+.floating-notifications.background .notification-row .notification-background {
+  border-radius: 0.5rem;
+  background-color: @background;
+  color: @foreground;
+  border: 1px solid @color5;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification.critical {
+  border: 1px solid @color1;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .summary {
+  margin: 0.5rem;
+  color: @foreground;
+  font-weight: bold;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .body {
+  margin: 0.5rem;
+  color: @color8;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > * {
+  min-height: 3rem;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action {
+  border-radius: 0.5rem;
+  color: @foreground;
+  background-color: @color0;
+  border: 1px solid @color8;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover {
+  background-color: @color8-hover;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:active {
+  background-color: @color8;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button {
+  margin: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  color: @foreground;
+  background-color: @color1;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:hover {
+  color: @background;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background-color: @color9;
+}
+
+.control-center {
+  border-radius: 0.5rem;
+  margin: 1rem;
+  background-color: @background;
+  color: @foreground;
+  padding: 1rem;
+  border: 1px solid @color5;
+}
+
+.control-center .widget-title {
+  color:  @foreground;
+  font-weight: bold;
+}
+
+.control-center .widget-title button {
+  border-radius: 0.5rem;
+  color: @foreground;
+  background-color: @color0;
+  border: 1px solid @color8;
+  padding: 0.5rem;
+}
+
+.control-center .widget-title button:hover {
+  background-color: @color8-hover;
+}
+
+.control-center .widget-title button:active {
+  background-color: @color8;
+}
+
+.control-center .notification-row .notification-background {
+  border-radius: 0.5rem;
+  margin: 0.5rem 0;
+  background-color: @color0;
+  color: @foreground;
+  border: 1px solid @color5;
+}
+
+.control-center .notification-row .notification-background .notification {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification.critical {
+  border: 1px solid @color1;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content {
+  color: @foreground;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .summary {
+  margin: 0.5rem;
+  color: @foreground;
+  font-weight: bold;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .body {
+  margin: 0.5rem;
+  color: @color8;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > * {
+  min-height: 3rem;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action {
+  border-radius: 0.5rem;
+  color: @foreground;
+  background-color: @color0;
+  border: 1px solid @color8;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover {
+  background-color: @color8-hover;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:active {
+  background-color: @color8;
+}
+
+.control-center .notification-row .notification-background .close-button {
+  margin: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  color: @foreground;
+  background-color: @color1;
+}
+
+.control-center .notification-row .notification-background .close-button:hover {
+  color: @background;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background-color: @color9;
+}
+
+progressbar,
+progress,
+trough {
+  border-radius: 0.5rem;
+}
+
+.notification.critical progress {
+  background-color: @color1;
+}
+
+.notification.low progress,
+.notification.normal progress {
+  background-color: @color6;
+}
+
+trough {
+  background-color: @color0;
+}
+
+.control-center trough {
+  background-color: @color8;
+}
+
+.control-center-dnd {
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.control-center-dnd slider {
+  background: @color8-hover;
+  border-radius: 0.5rem;
+}
+
+.widget-dnd {
+  color: @color8;
+}
+
+.widget-dnd > switch {
+  border-radius: 0.5rem;
+  background: @color8-hover;
+  border: 1px solid @color8;
+}
+
+.widget-dnd > switch:checked slider {
+  background: @color4;
+}
+
+.widget-dnd > switch slider {
+  background: @color8;
+  border-radius: 0.5rem;
+  margin: 0.25rem;
+}
