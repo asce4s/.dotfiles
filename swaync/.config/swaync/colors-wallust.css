@@ -1,15 +1,15 @@
 /* wallust template - colors-swaync */
 
-@define-color background #26262D;
-@define-color foreground #FEF2DE;
-@define-color color0 #4C4C53;
-@define-color color1 #6E4D5C;
-@define-color color4 #A9766B;
-@define-color color5 #B27C6E;
-@define-color color6 #BDA478;
-@define-color color8 #ACA08B;
-@define-color color9 #93677B;
-@define-color color8-hover rgba(172,160,139, 0.3);
+@define-color background #111014;
+@define-color foreground #CCF0FA;
+@define-color color0 #39393C;
+@define-color color1 #100C17;
+@define-color color4 #1E5085;
+@define-color color5 #963B3A;
+@define-color color6 #519EB4;
+@define-color color8 #799DA7;
+@define-color color9 #16101F;
+@define-color color8-hover rgba(121,157,167, 0.3);
 
 * {
   all: unset;
