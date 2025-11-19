@@ -1,0 +1,175 @@
+/* wallust template - colors-thunar (GTK3) */
+
+/* Base colors */
+@define-color theme_bg_color {{background}};
+@define-color theme_base_color {{color0}};
+@define-color theme_fg_color {{foreground}};
+@define-color theme_text_color {{foreground}};
+@define-color theme_selected_bg_color {{color5}};
+@define-color theme_selected_fg_color {{foreground}};
+
+/* Unfocused colors */
+@define-color theme_unfocused_bg_color {{color0}};
+@define-color theme_unfocused_fg_color {{color7}};
+@define-color theme_unfocused_text_color {{color7}};
+@define-color theme_unfocused_base_color {{color0}};
+@define-color theme_unfocused_selected_bg_color {{color5}};
+@define-color theme_unfocused_selected_fg_color {{foreground}};
+@define-color theme_unfocused_selected_bg_color_alt {{color5}};
+
+/* Header/Titlebar colors */
+@define-color theme_header_background {{color0}};
+@define-color theme_header_background_light {{background}};
+@define-color theme_header_foreground {{foreground}};
+@define-color theme_header_background_backdrop {{color0}};
+@define-color theme_header_foreground_backdrop {{foreground}};
+@define-color theme_header_foreground_insensitive {{color8}};
+@define-color theme_header_foreground_insensitive_backdrop {{color8}};
+
+@define-color theme_titlebar_background {{color0}};
+@define-color theme_titlebar_background_light {{background}};
+@define-color theme_titlebar_foreground {{foreground}};
+@define-color theme_titlebar_background_backdrop {{color0}};
+@define-color theme_titlebar_foreground_backdrop {{foreground}};
+@define-color theme_titlebar_foreground_insensitive {{color8}};
+@define-color theme_titlebar_foreground_insensitive_backdrop {{color8}};
+
+/* View colors */
+@define-color theme_view_bg_color {{color0}};
+@define-color theme_view_text_color {{foreground}};
+@define-color theme_view_hover_decoration_color {{color4}};
+@define-color theme_view_active_decoration_color {{color5}};
+@define-color theme_hovering_selected_bg_color {{color5}};
+@define-color content_view_bg {{color0}};
+
+/* Button colors */
+@define-color theme_button_background_normal {{color0}};
+@define-color theme_button_foreground_normal {{foreground}};
+@define-color theme_button_background_active {{color5}};
+@define-color theme_button_foreground_active {{foreground}};
+@define-color theme_button_background_backdrop {{color0}};
+@define-color theme_button_foreground_backdrop {{foreground}};
+@define-color theme_button_background_insensitive {{color0}};
+@define-color theme_button_foreground_insensitive {{color8}};
+@define-color theme_button_background_backdrop_insensitive {{color0}};
+@define-color theme_button_foreground_backdrop_insensitive {{color8}};
+@define-color theme_button_foreground_active_backdrop {{foreground}};
+@define-color theme_button_foreground_active_backdrop_insensitive {{color8}};
+@define-color theme_button_foreground_active_insensitive {{color8}};
+
+/* Button decoration (focus/hover) */
+@define-color theme_button_decoration_focus {{color5}};
+@define-color theme_button_decoration_hover {{color4}};
+@define-color theme_button_decoration_focus_backdrop {{color5}};
+@define-color theme_button_decoration_hover_backdrop {{color4}};
+@define-color theme_button_decoration_focus_insensitive {{color8}};
+@define-color theme_button_decoration_hover_insensitive {{color8}};
+@define-color theme_button_decoration_focus_backdrop_insensitive {{color8}};
+@define-color theme_button_decoration_hover_backdrop_insensitive {{color8}};
+
+/* Border colors */
+@define-color borders {{color8}};
+@define-color unfocused_borders {{color8}};
+@define-color insensitive_borders {{color8}};
+@define-color unfocused_insensitive_borders {{color8}};
+
+/* Insensitive (disabled) colors */
+@define-color insensitive_base_color {{color0}};
+@define-color insensitive_base_fg_color {{color8}};
+@define-color insensitive_bg_color {{color0}};
+@define-color insensitive_fg_color {{color8}};
+@define-color insensitive_borders {{color8}};
+@define-color insensitive_selected_bg_color {{color0}};
+@define-color insensitive_selected_fg_color {{color8}};
+@define-color insensitive_unfocused_bg_color {{color0}};
+@define-color insensitive_unfocused_fg_color {{color8}};
+@define-color insensitive_unfocused_selected_bg_color {{color0}};
+@define-color insensitive_unfocused_selected_fg_color {{color8}};
+@define-color theme_unfocused_view_bg_color {{color0}};
+@define-color theme_unfocused_view_text_color {{color8}};
+
+/* Link colors */
+@define-color link_color {{color4}};
+@define-color link_visited_color {{color5}};
+
+/* Tooltip colors */
+@define-color tooltip_background {{color0}};
+@define-color tooltip_border {{color8}};
+@define-color tooltip_text {{foreground}};
+
+/* Error, warning, success colors */
+@define-color error_color {{color1}};
+@define-color error_color_backdrop {{color1}};
+@define-color error_color_insensitive {{color1}};
+@define-color error_color_insensitive_backdrop {{color1}};
+
+@define-color warning_color {{color3}};
+@define-color warning_color_backdrop {{color3}};
+@define-color warning_color_insensitive {{color3}};
+@define-color warning_color_insensitive_backdrop {{color3}};
+
+@define-color success_color {{color2}};
+@define-color success_color_backdrop {{color2}};
+@define-color success_color_insensitive {{color2}};
+@define-color success_color_insensitive_backdrop {{color2}};
+
+/* Thunar-specific styling using GTK3 widget classes */
+window.thunar {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+}
+
+window.thunar paned {
+  background-color: @theme_bg_color;
+}
+
+window.thunar paned separator {
+  background-color: @borders;
+}
+
+window.thunar .sidebar {
+  background-color: @theme_base_color;
+}
+
+window.thunar treeview {
+  background-color: @theme_base_color;
+  color: @theme_text_color;
+}
+
+window.thunar treeview:selected {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+window.thunar treeview:hover {
+  background-color: @theme_hovering_selected_bg_color;
+}
+
+window.thunar iconview {
+  background-color: @theme_base_color;
+  color: @theme_text_color;
+}
+
+window.thunar iconview:selected {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+window.thunar iconview:hover {
+  background-color: @theme_hovering_selected_bg_color;
+}
+
+/* Standard GTK3 widget styling for Thunar */
+.scrolledwindow {
+  background-color: @theme_base_color;
+}
+
+.view {
+  background-color: @theme_base_color;
+  color: @theme_text_color;
+}
+
+.view:selected {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}

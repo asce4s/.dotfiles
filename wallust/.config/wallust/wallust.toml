@@ -65,3 +65,6 @@ swaync.target = '~/.config/swaync/colors-wallust.css'
 hyprlock.template = 'colors-hyprlock.conf'
 hyprlock.target = '~/.config/hypr/wallust/wallust-hyprlock.conf'
 
+thunar.template = 'colors-thunar.css'
+thunar.target = '~/.config/gtk-3.0/colors.css'
+

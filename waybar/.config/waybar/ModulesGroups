@@ -13,12 +13,9 @@
 		"transition-left-to-right": true
         },
 	"modules": [
-		"custom/menu",
-		"custom/light_dark",
 		"custom/file_manager",
 		"custom/tty",
 		"custom/browser",
-		"custom/settings",
 	]
 },
 "group/motherboard": {
@@ -104,7 +101,6 @@
         },
 	"modules": [
 		"custom/swaync",
-		"custom/dot_update",
 	]
 },
 
