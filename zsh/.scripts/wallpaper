@@ -1,0 +1,22 @@
+#!/bin/bash
+
+awww img $1 --transition-type random --transition-duration 2
+
+#run wallust
+wallust run --skip-sequences $1
+killall swaync
+swaync &
+
+# Copy wallpaper to system location for SDDM
+sddm_wallpaper_dir="/usr/share/wallpapers"
+sddm_wallpaper="$sddm_wallpaper_dir/current_wallpaper.jpg"
+
+if [[ -d "$sddm_wallpaper_dir" ]]; then
+  # Copy to system location (requires sudo)
+  if sudo cp $1 "$sddm_wallpaper" 2>/dev/null; then
+    sudo chmod 644 "$sddm_wallpaper" 2>/dev/null
+  fi
+fi
+
+# Ensure permissions for hyprlock
+chmod 755 "$1" 2>/dev/null || true

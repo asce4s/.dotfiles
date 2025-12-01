@@ -1,3 +1,54 @@
+vim.filetype.add({
+	extension = {
+		rs = "rust",
+	},
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "rust",
+	callback = function()
+		vim.lsp.start({
+			name = "tailwindcss",
+			cmd = { "tailwindcss-language-server", "--stdio" },
+			root_dir = vim.fn.getcwd(),
+			filetypes = { "rust" },
+			settings = {
+				tailwindCSS = {
+					includeLanguages = { rust = "html" },
+					experimental = {
+						classRegex = {
+							{ [[<[%w%s%p]-class="([^"]*)"]], 1 },
+
+							-- ✔ class="..."
+							{ [[class="([^"]*)"]], 1 },
+
+							-- ✔ class:("...")
+							{ [[class:\s*\(\s*"([^"]*)"\s*\)]], 1 },
+
+							-- ✔ class=("...")
+							{ [[class\(\s*"([^"]*)"\s*\)]], 1 },
+
+							-- ✔ MULTILINE view! { ... } extractor
+							{ [[view!\s*\{([^}]*)\}]], 1 },
+						},
+					},
+				},
+			},
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	pattern = { "*.html", "*.tsx", "*.rs" },
+	callback = function()
+		local clients = vim.lsp.get_clients() -- updated
+		for _, client in ipairs(clients) do
+			if client.name == "tailwindcss" then
+				vim.lsp.buf_attach_client(0, client.id)
+			end
+		end
+	end,
+})
 return {
 	-- Main LSP Configuration
 	"neovim/nvim-lspconfig",
@@ -227,21 +278,6 @@ return {
 			-- 	end,
 			-- 	capabilities = capabilities,
 			-- },
-
-			-- ESLint language server - provides diagnostics and code actions
-			eslint = {
-				settings = {
-					format = false, -- We use conform.nvim for formatting
-					-- Auto-fix on save is handled by code action on save below
-				},
-				on_attach = function(_, bufnr)
-					-- Auto-fix ESLint errors on save
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end,
-			},
 
 			lua_ls = {
 				-- cmd = { ... },
