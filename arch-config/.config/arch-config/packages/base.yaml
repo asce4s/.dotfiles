@@ -1,0 +1,94 @@
+# Base packages installed on all systems
+# These packages are included regardless of host or modules
+
+description: Base system packages
+
+packages:
+  # Essential base system
+  - base
+  - base-devel
+
+  # Kernel (uncomment the one you use)
+  - linux              # Standard kernel
+  - linux-headers
+  - linux-zen          # Zen kernel (optimized for desktop)
+  - linux-zen-headers
+  - linux-lts          # Long-term support kernel
+  - linux-lts-headers
+  # - linux-hardened     # Security-focused kernel
+
+  # Firmware (usually needed)
+  - linux-firmware
+
+  # Basic tools (uncomment as needed)
+  - git
+  - vim
+  - neovim
+  - htop
+  - btop
+  - kitty
+  - ghostty
+  - zen-browser-bin
+  - bluez
+  - bluez-utils
+  - fastfetch
+  - thunar
+  - thunar-archive-plugin
+  - unzip
+  - unrar
+  - pipewire 
+  - pipewire-alsa 
+  - pipewire-pulse 
+  - pipewire-jack 
+  - wireplumber
+  - alsa-firmware
+  - playerctl
+  - alsa-plugins
+  - alsa-utils
+  - sof-firmware
+  - rtkit
+  - openssh
+  - zip
+  - xarchiver
+  - stow
+  - bat
+  - 7zip
+  - networkmanager
+  - network-manager-applet
+  - cmake
+  - meson
+  - ripgrep
+  - wget
+  - qt5ct
+  - qt6ct
+  - kvantum
+  - kvantum-qt5
+  - webkit2gtk-4.1
+  - webkit2gtk
+  - rose-pine-gtk-theme-full
+  - lm_sensors
+  - libnotify
+  - gtk-engine-murrine
+  - acpi
+  - snapper
+  - pamixer
+  - power-profiles-daemon
+  - papirus-icon-theme
+  - xdg-desktop-portal-gtk
+  - sassc
+  - gnome-themes-extra
+  - nwg-look
+  - pamac
+  - btrfs-assistant
+  - ffmpegthumbnailer
+  - ffmpegthumbs
+  - tumbler
+  - qt6-imageformats
+  - libgsf
+  - libopenraw
+  - libspng
+  - poppler-glib
+  - gst-libav
+  - gst-plugin-pipewire
+  - gst-plugins-bad
+  - gst-plugins-ugly

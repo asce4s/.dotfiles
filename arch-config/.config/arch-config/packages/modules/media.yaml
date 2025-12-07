@@ -1,0 +1,16 @@
+description: Media
+
+# List of packages in this module
+packages:
+  - mpv-mpris
+  - vlc
+  - vlc-plugin-ffmpeg
+  - vlc-plugin-gstreamer
+  - vlc-plugins-all
+  - haruna
+  
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""

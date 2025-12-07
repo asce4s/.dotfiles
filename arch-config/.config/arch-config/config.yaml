@@ -1,0 +1,14 @@
+host: zeref
+enabled_modules:
+- terminal
+- hyprland
+- fonts
+- dev
+- media
+- game
+- misc
+additional_packages: []
+backup_tool: null
+snapper_config: root
+flatpak_scope: user
+auto_prune: false

@@ -1,0 +1,28 @@
+description: Hyprland 
+
+# List of packages in this module
+packages:
+  - hyprland
+  - waybar
+  - uwsm
+  - app2unit-git
+  - hypridle
+  - hyprlock
+  - hyprpolkitagent
+  - xdg-desktop-portal-hyprland
+  - awww-git
+  - swaync
+  - slurp
+  - grim
+  - wl-clipboard
+  - rofi
+  - nordzy-hyprcursors
+  - wallust-git
+  - brightnessctl
+  - satty
+
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""

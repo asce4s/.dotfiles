@@ -1,0 +1,17 @@
+description: Terminal
+
+# List of packages in this module
+packages:
+  - zsh
+  - starship
+  - zoxide
+  - fzf
+  - tmux
+  - antibody-bin
+  - eza
+
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""

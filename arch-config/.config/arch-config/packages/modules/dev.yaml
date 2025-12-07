@@ -1,0 +1,46 @@
+description: Dev tools 
+
+# List of packages in this module
+packages:
+  - go
+  - cursor-bin
+  - github-cli
+  - dbeaver
+   # Build System Dependencies
+  - bc
+  - jq
+  - pv
+    # Translation Tools
+  - crowdin-cli-bin
+
+    # Development Libraries
+  - glib2-devel
+  - gjs
+
+    # Container & Infrastructure Tools
+  - lazydocker
+  - terraform
+  - aws-cli-v2
+
+    # Version Control & Git Tools
+  - lazygit
+
+    # Programming Languages & Runtimes
+  - python
+  - python-defusedxml
+  - python-packaging
+  - python-pyqt6
+  - python-pyquery
+  - fnm
+  - typescript
+  - perl
+
+    # Compilers & Build Tools
+  - docker
+  - docker-buildx
+  - docker-compose
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""

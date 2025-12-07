@@ -1,0 +1,12 @@
+description: Misc
+
+# List of packages in this module
+packages:
+  - slack-desktop
+  - brave
+  - helium-browser-bin
+
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""

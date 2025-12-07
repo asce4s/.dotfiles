@@ -9,6 +9,10 @@
   padding: 1rem;
 }
 
+.blank-window {  
+   background: transparent;  
+}
+
 .floating-notifications.background .notification-row .notification-background {
   border-radius: 0.5rem;
   background-color: #191724;

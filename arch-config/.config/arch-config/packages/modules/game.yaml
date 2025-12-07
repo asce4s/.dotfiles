@@ -1,0 +1,24 @@
+description: Dev tools
+
+# List of packages in this module
+packages:
+  # Game Launchers & Platforms
+  - steam
+  - lutris
+
+  # Gaming Performance
+  - gamemode
+  - lib32-gamemode
+
+  # Graphics & Compatibility
+  - vkd3d
+  - lib32-gnutls
+
+  # GPU Monitoring
+  - nvtop
+  - mesa-utils
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""
