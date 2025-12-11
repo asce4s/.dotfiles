@@ -3,7 +3,7 @@ description: Misc
 # List of packages in this module
 packages:
   - slack-desktop
-  - brave
+  - brave-bin
   - helium-browser-bin
 
 conflicts: []

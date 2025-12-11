@@ -1,43 +1,43 @@
-vim.filetype.add({
-	extension = {
-		rs = "rust",
-	},
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "rust",
-	callback = function()
-		vim.lsp.start({
-			name = "tailwindcss",
-			cmd = { "tailwindcss-language-server", "--stdio" },
-			root_dir = vim.fn.getcwd(),
-			filetypes = { "rust" },
-			settings = {
-				tailwindCSS = {
-					includeLanguages = { rust = "html" },
-					experimental = {
-						classRegex = {
-							{ [[<[%w%s%p]-class="([^"]*)"]], 1 },
-
-							-- ✔ class="..."
-							{ [[class="([^"]*)"]], 1 },
-
-							-- ✔ class:("...")
-							{ [[class:\s*\(\s*"([^"]*)"\s*\)]], 1 },
-
-							-- ✔ class=("...")
-							{ [[class\(\s*"([^"]*)"\s*\)]], 1 },
-
-							-- ✔ MULTILINE view! { ... } extractor
-							{ [[view!\s*\{([^}]*)\}]], 1 },
-						},
-					},
-				},
-			},
-		})
-	end,
-})
-
+-- vim.filetype.add({
+-- 	extension = {
+-- 		rs = "rust",
+-- 	},
+-- })
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "rust",
+-- 	callback = function()
+-- 		vim.lsp.start({
+-- 			name = "tailwindcss",
+-- 			cmd = { "tailwindcss-language-server", "--stdio" },
+-- 			root_dir = vim.fn.getcwd(),
+-- 			filetypes = { "rust" },
+-- 			settings = {
+-- 				tailwindCSS = {
+-- 					includeLanguages = { rust = "html" },
+-- 					experimental = {
+-- 						classRegex = {
+-- 							{ [[<[%w%s%p]-class="([^"]*)"]], 1 },
+--
+-- 							-- ✔ class="..."
+-- 							{ [[class="([^"]*)"]], 1 },
+--
+-- 							-- ✔ class:("...")
+-- 							{ [[class:\s*\(\s*"([^"]*)"\s*\)]], 1 },
+--
+-- 							-- ✔ class=("...")
+-- 							{ [[class\(\s*"([^"]*)"\s*\)]], 1 },
+--
+-- 							-- ✔ MULTILINE view! { ... } extractor
+-- 							{ [[view!\s*\{([^}]*)\}]], 1 },
+-- 						},
+-- 					},
+-- 				},
+-- 			},
+-- 		})
+-- 	end,
+-- })
+--
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 	pattern = { "*.html", "*.tsx", "*.rs" },
 	callback = function()

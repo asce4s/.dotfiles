@@ -1,0 +1,17 @@
+# Path to the directory containing your wallpapers
+# Default: ~/Pictures/wallpapers
+wallpaper_path = "~/Pictures/wallpapers"
+
+# Path where the current wallpaper symlink will be created
+# This symlink points to the currently selected wallpaper
+# Default: ~/.config/wallity/.current_wallpaper
+current_wallpaper = "~/.config/hypr/hypr_shared/current_wallpaper"
+
+# Script to execute after setting a wallpaper
+# For Hyprland, you might use: hyprctl hyprpaper wallpaper "eDP-1,~/.config/wallity/.current_wallpaper"
+# Default: "" (empty)
+post_script = "~/.scripts/wallpaper ~/.config/hypr/hypr_shared/current_wallpaper"
+
+# Directory where thumbnail cache is stored
+# Default: ~/.cache/wallity/thumbnails
+cache_path = "~/.cache/wallity/thumbnails"

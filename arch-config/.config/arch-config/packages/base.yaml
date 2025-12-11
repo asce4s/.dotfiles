@@ -9,11 +9,11 @@ packages:
   - base-devel
 
   # Kernel (uncomment the one you use)
-  - linux              # Standard kernel
+  - linux # Standard kernel
   - linux-headers
-  - linux-zen          # Zen kernel (optimized for desktop)
+  - linux-zen # Zen kernel (optimized for desktop)
   - linux-zen-headers
-  - linux-lts          # Long-term support kernel
+  - linux-lts # Long-term support kernel
   - linux-lts-headers
   # - linux-hardened     # Security-focused kernel
 
@@ -36,10 +36,10 @@ packages:
   - thunar-archive-plugin
   - unzip
   - unrar
-  - pipewire 
-  - pipewire-alsa 
-  - pipewire-pulse 
-  - pipewire-jack 
+  - pipewire
+  - pipewire-alsa
+  - pipewire-pulse
+  - pipewire-jack
   - wireplumber
   - alsa-firmware
   - playerctl
@@ -92,3 +92,5 @@ packages:
   - gst-plugin-pipewire
   - gst-plugins-bad
   - gst-plugins-ugly
+  - pavucontrol
+  - speech-dispatcher
