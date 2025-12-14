@@ -3,19 +3,19 @@
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  # selected=$(find ~/projects ~/.dotfiles -mindepth 1 -maxdepth 3 -type d | fzf)
-  selected=$(find ~/projects ~/.dotfiles \
-    -mindepth 0 -maxdepth 3 \
-    \( -type d \( -name .git -o -name node_modules \) -prune \) -o \
-    -type d |
-    fzf)
+  selected=$(fd -t d -H --max-depth 3 \
+    --exclude .git \
+    --exclude node_modules \
+    . ~/projects ~/.dotfiles | fzf)
 fi
 
 if [[ -z $selected ]]; then
   exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+selected_name=$(echo "$selected" | awk -F/ '{print $(NF-1)"_"$NF}' | tr ./ _)
+
+#selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then

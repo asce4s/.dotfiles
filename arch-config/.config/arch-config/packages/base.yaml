@@ -98,3 +98,4 @@ packages:
   - speech-dispatcher
   - ly
   - plymouth
+  - fd
