@@ -1,12 +1,47 @@
 #!/bin/bash
 
+ROOTS=(
+  "$HOME/projects"
+  "$HOME/.dotfiles"
+)
+
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(fd -t d -H --max-depth 3 \
-    --exclude .git \
-    --exclude node_modules \
-    . ~/projects ~/.dotfiles | fzf)
+  result=$(
+    {
+      # Prepend root directories explicitly
+      for root in "${ROOTS[@]}"; do
+        [[ -d "$root" ]] && echo "$root"
+      done
+
+      # Then list subdirectories
+      fd -t d -H \
+        --exclude .git \
+        --exclude node_modules \
+        . "${ROOTS[@]}"
+    } |
+      fzf \
+        --bind 'ctrl-e:become(echo EDITOR:{})' \
+        --bind 'ctrl-h:become(echo SPLIT:{})' \
+        --bind 'ctrl-v:become(echo VSPLIT:{})'
+  )
+  # Check if user triggered special action
+  if [[ $result == EDITOR:* ]]; then
+    selected="${result#EDITOR:}"
+    action="editor"
+  elif [[ $result == SPLIT:* ]]; then
+    selected="${result#SPLIT:}"
+    tmux split-window -h -c "$selected"
+    exit 0
+  elif [[ $result == VSPLIT:* ]]; then
+    selected="${result#VSPLIT:}"
+    tmux split-window -v -c "$selected"
+    exit 0
+  else
+    selected="$result"
+    action="normal"
+  fi
 fi
 
 if [[ -z $selected ]]; then
@@ -14,22 +49,29 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(echo "$selected" | awk -F/ '{print $(NF-1)"_"$NF}' | tr ./ _)
-
-#selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
+# Create session if it doesn't exist
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-
-  tmux new-session -s $selected_name -c $selected
+  if [[ $action == "editor" ]]; then
+    tmux new-session -s "$selected_name" -c "$selected" nvim .
+  else
+    tmux new-session -s "$selected_name" -c "$selected"
+  fi
   exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2>/dev/null; then
-  tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+  if [[ $action == "editor" ]]; then
+    tmux new-session -ds "$selected_name" -c "$selected" nvim .
+  else
+    tmux new-session -ds "$selected_name" -c "$selected"
+  fi
 fi
 
+# Attach or switch
 if [[ -z $TMUX ]]; then
-  tmux attach -t $selected_name
+  tmux attach -t "$selected_name"
 else
-  tmux switch-client -t $selected_name
+  tmux switch-client -t "$selected_name"
 fi

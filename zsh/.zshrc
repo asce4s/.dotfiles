@@ -145,7 +145,7 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 # fi
 
 eval "$(starship init zsh)"
-
+source <(fzf --zsh)
 # pnpm
 export PNPM_HOME="/home/supun/.local/share/pnpm"
 case ":$PATH:" in
