@@ -21,6 +21,7 @@ packages:
   - linux-firmware
 
   # Basic tools (uncomment as needed)
+  - kernel-install-for-dracut
   - git
   - vim
   - neovim
@@ -80,6 +81,7 @@ packages:
   - nwg-look
   - pamac
   - btrfs-assistant
+  - qt6-multimedia-ffmpeg
   - ffmpegthumbnailer
   - ffmpegthumbs
   - tumbler
@@ -94,3 +96,5 @@ packages:
   - gst-plugins-ugly
   - pavucontrol
   - speech-dispatcher
+  - ly
+  - plymouth

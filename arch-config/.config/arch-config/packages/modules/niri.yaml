@@ -1,0 +1,12 @@
+description: Dev tools
+
+# List of packages in this module
+packages:
+  - niri
+  - alacritty
+  - xwayland-satellite
+  - xdg-desktop-portal-gnome
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: "systemctl --user add-wants niri.service"

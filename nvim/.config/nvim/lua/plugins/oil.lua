@@ -2,6 +2,10 @@ return {
 	"stevearc/oil.nvim",
 	opts = {
 		default_file_explorer = true, -- replace netrw
+		view_options = {
+			-- Show files and directories that start with "."
+			show_hidden = true,
+		},
 	},
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function(_, opts)

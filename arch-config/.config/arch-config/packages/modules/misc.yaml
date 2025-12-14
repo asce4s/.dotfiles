@@ -4,7 +4,10 @@ description: Misc
 packages:
   - slack-desktop
   - brave-bin
+  - noctalia-shell-git
   - helium-browser-bin
+  - xdg-desktop-portal
+  - xdg-desktop-portal-wlr
 
 conflicts: []
 

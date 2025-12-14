@@ -9,7 +9,6 @@ packages:
   - vlc-plugins-all
   - haruna
   - ffmpeg
-  - ffmpeg-libs
 
 # Modules that conflict with this one
 conflicts: []
