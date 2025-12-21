@@ -15,44 +15,77 @@ else
         [[ -d "$root" ]] && echo "$root"
       done
 
-      # Then list subdirectories
+      # Then list subdirectories ONLY under ROOTS
       fd -t d -H \
         --exclude .git \
         --exclude node_modules \
+        --max-depth 4 \
         . "${ROOTS[@]}"
     } |
       fzf \
         --bind 'ctrl-e:become(echo EDITOR:{})' \
         --bind 'ctrl-h:become(echo SPLIT:{})' \
-        --bind 'ctrl-v:become(echo VSPLIT:{})'
+        --bind 'ctrl-v:become(echo VSPLIT:{})' \
+        --bind 'ctrl-n:become(echo NEW:{})'
   )
-  # Check if user triggered special action
+
+  # Decode fzf action
   if [[ $result == EDITOR:* ]]; then
     selected="${result#EDITOR:}"
     action="editor"
+
   elif [[ $result == SPLIT:* ]]; then
     selected="${result#SPLIT:}"
     tmux split-window -h -c "$selected"
     exit 0
+
   elif [[ $result == VSPLIT:* ]]; then
     selected="${result#VSPLIT:}"
     tmux split-window -v -c "$selected"
     exit 0
+
+  elif [[ $result == NEW:* ]]; then
+    selected="${result#NEW:}"
+    action="new"
+
   else
     selected="$result"
     action="normal"
   fi
 fi
 
-if [[ -z $selected ]]; then
-  exit 0
-fi
+[[ -z $selected ]] && exit 0
 
-selected_name=$(echo "$selected" | awk -F/ '{print $(NF-1)"_"$NF}' | tr ./ _)
+# Base session name from path
+base_name=$(echo "$selected" | awk -F/ '{print $(NF-1)"_"$NF}' | tr ./ _)
+selected_name="$base_name"
+
+# ---------- AUTO-NUMBERING FOR CTRL+N ----------
+if [[ $action == "new" ]]; then
+  max=-1
+  base_exists=false
+
+  while read -r s; do
+    if [[ $s == "$base_name" ]]; then
+      base_exists=true
+      max=0
+    elif [[ $s =~ ^${base_name}_(\d+)$ ]]; then
+      ((${BASH_REMATCH[1]} > max)) && max=${BASH_REMATCH[1]}
+    fi
+  done < <(tmux list-sessions -F '#S' 2>/dev/null)
+
+  if ! $base_exists && [[ $max -lt 0 ]]; then
+    selected_name="$base_name"
+  else
+    selected_name="${base_name}_$((max + 1))"
+  fi
+fi
+# ------------------------------------------------
+
 tmux_running=$(pgrep tmux)
 
-# Create session if it doesn't exist
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+# Start tmux if not running
+if [[ -z $TMUX && -z $tmux_running ]]; then
   if [[ $action == "editor" ]]; then
     tmux new-session -s "$selected_name" -c "$selected" nvim .
   else
@@ -61,12 +94,18 @@ if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
   exit 0
 fi
 
-if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+# Create session if missing (normal/editor only)
+if [[ $action != "new" ]] && ! tmux has-session -t="$selected_name" 2>/dev/null; then
   if [[ $action == "editor" ]]; then
     tmux new-session -ds "$selected_name" -c "$selected" nvim .
   else
     tmux new-session -ds "$selected_name" -c "$selected"
   fi
+fi
+
+# NEW always creates a session
+if [[ $action == "new" ]]; then
+  tmux new-session -ds "$selected_name" -c "$selected"
 fi
 
 # Attach or switch
