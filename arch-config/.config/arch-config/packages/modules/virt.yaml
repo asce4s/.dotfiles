@@ -1,0 +1,22 @@
+description: Fonts
+
+# List of packages in this module
+packages:
+  - qemu-full
+  - qemu-img
+  - libvirt
+  - virt-install
+  - virt-manager
+  - virt-viewer
+  - edk2-ovmf
+  - dnsmasq
+  - swtpm
+  - guestfs-tools
+  - libosinfo
+  - tuned
+
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: "sudo systemctl enable libvirtd.service"

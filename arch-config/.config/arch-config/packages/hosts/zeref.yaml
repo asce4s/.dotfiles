@@ -5,7 +5,7 @@ description: Packages specific to zeref
 
 # Packages to install only on this host
 packages:
-  - nvidia-dkms
+  - nvidia-open-dkms
   - nvidia-utils
   - nvidia-settings
   - libva-nvidia-driver
@@ -13,4 +13,4 @@ packages:
   - vkd3d
   - mcontrolcenter-bin
 # Packages to exclude from base or modules on this host
-exclude: []
+exclude: ["brltty"]
