@@ -13,8 +13,8 @@ packages:
   - linux-headers
   - linux-zen # Zen kernel (optimized for desktop)
   - linux-zen-headers
-  - linux-lts # Long-term support kernel
-  - linux-lts-headers
+  # - linux-lts # Long-term support kernel
+  # - linux-lts-headers
   # - linux-hardened     # Security-focused kernel
 
   # Firmware (usually needed)
@@ -97,5 +97,6 @@ packages:
   - pavucontrol
   - speech-dispatcher
   - ly
-  - plymouth
+  # - plymouth
   - fd
+  - zathura

@@ -1,11 +1,11 @@
 /* wallust template - colors-rofi */
 
 * {
-    background:     #272727;
-    background-alt: #4C4C4C;
-    foreground:     #F5F5F5;
-    selected:       #A3A3A3;
-    active:         #212121;
-    urgent:         #1D1D1D;
+    background:     #191A1A;
+    background-alt: #404141;
+    foreground:     #F0EED5;
+    selected:       #5B8071;
+    active:         #32433D;
+    urgent:         #171A1B;
 }
 

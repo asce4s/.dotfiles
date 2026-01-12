@@ -2,7 +2,7 @@ description: Fonts
 
 # List of packages in this module
 packages:
-  - qemu-full
+  # - qemu
   - qemu-img
   - libvirt
   - virt-install

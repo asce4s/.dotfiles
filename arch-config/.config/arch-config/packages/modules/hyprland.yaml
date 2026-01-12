@@ -1,4 +1,4 @@
-description: Hyprland 
+description: Hyprland
 
 # List of packages in this module
 packages:
@@ -20,6 +20,9 @@ packages:
   - wallust-git
   - brightnessctl
   - satty
+  - hyprcursor
+  - hyprland-guiutils
+  - hyprutils
 
 # Modules that conflict with this one
 conflicts: []

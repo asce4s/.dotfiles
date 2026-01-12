@@ -71,7 +71,7 @@ textbox-prompt-colon {
     str:                         "";
     padding:                     10px 14px;
     border-radius:               10px;
-    background-color:            @urgent;
+    background-color:            @selected;
     text-color:                  @background;
 }
 prompt {
