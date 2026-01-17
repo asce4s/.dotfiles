@@ -38,22 +38,22 @@ return {
 			toggle_telescope(harpoon:list())
 		end, { desc = "Open harpoon window" })
 
-		vim.keymap.set("n", "<C-1>", function()
+		vim.keymap.set("n", "<leader>1", function()
 			harpoon:list():select(1)
 		end, {
 			desc = "Select first buffer in harpoon",
 		})
-		vim.keymap.set("n", "<C-2>", function()
+		vim.keymap.set("n", "<leader>2", function()
 			harpoon:list():select(2)
 		end, {
 			desc = "Select second buffer in harpoon",
 		})
-		vim.keymap.set("n", "<C-3>", function()
+		vim.keymap.set("n", "<leader>3", function()
 			harpoon:list():select(3)
 		end, {
 			desc = "Select third buffer in harpoon",
 		})
-		vim.keymap.set("n", "<C-4>", function()
+		vim.keymap.set("n", "<leader>4", function()
 			harpoon:list():select(4)
 		end, {
 			desc = "Select fourth buffer in harpoon",
