@@ -7,7 +7,7 @@ customCommands:
       - type: "menuFromCommand"
         title: "AI Commits"
         key: "Msg"
-        command: "aicommit"
+        command: "aicommit --dry-run"
         filter: "^(?P<raw>.+)$"
         valueFormat: "{{ .raw }}"
         labelFormat: "{{ .raw | green }}"
