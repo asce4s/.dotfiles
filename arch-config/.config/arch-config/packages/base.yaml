@@ -97,6 +97,9 @@ packages:
   - pavucontrol
   - speech-dispatcher
   - ly
+  - thunar
+  - thunar-volman
+  - gvfs
   # - plymouth
   - fd
   - zathura
