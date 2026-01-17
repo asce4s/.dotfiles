@@ -7,7 +7,7 @@ customCommands:
       - type: "menuFromCommand"
         title: "AI Commits"
         key: "Msg"
-        command: "gencommit"
+        command: "aicommit"
         filter: "^(?P<raw>.+)$"
         valueFormat: "{{ .raw }}"
         labelFormat: "{{ .raw | green }}"
