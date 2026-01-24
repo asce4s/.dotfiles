@@ -103,3 +103,4 @@ packages:
   # - plymouth
   - fd
   - zathura
+  - ttf-ms-win11-auto
