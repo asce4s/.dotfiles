@@ -53,6 +53,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			--   },
 			-- },
 			-- pickers = {}
+			pickers = {
+				find_files = {
+					find_command = { "fd", "--type", "f", "--color", "never", "--no-require-git" },
+				},
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_cursor(),

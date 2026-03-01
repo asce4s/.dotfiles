@@ -104,3 +104,6 @@ packages:
   - fd
   - zathura
   - ttf-ms-win11-auto
+  - gnome-keyring
+  - seahorse
+  - libsecret
