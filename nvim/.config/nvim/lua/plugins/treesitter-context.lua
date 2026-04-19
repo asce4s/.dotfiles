@@ -1,5 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter-context",
+	branch = "master",
 	event = "VeryLazy",
 	config = function()
 		require("treesitter-context").setup({
