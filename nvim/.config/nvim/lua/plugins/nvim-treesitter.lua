@@ -2,7 +2,7 @@ return { -- Highlight, edit, and navigate code
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.config", -- Sets main module to use for opts
-	branch = "main",
+	branch = "main", -- nvim 0.12+ support tracks main
 	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "nvim-treesitter/nvim-treesitter-context" },
 	-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 	opts = {
