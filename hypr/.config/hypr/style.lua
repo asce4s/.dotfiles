@@ -1,6 +1,11 @@
 -- Static visual settings (border colors come from wallust/wallust-hyprland.lua)
 
+local config = require("config")
+
 hl.config({
+	input = {
+		kb_layout = table.concat(config.kbLayouts, ","),
+	},
 	general = {
 		gaps_in = 2,
 		gaps_out = 5,

@@ -7,6 +7,7 @@
 @define-color color4 {{color4}};
 @define-color color5 {{color5}};
 @define-color color6 {{color6}};
+@define-color color7 {{color7}};
 @define-color color8 {{color8}};
 @define-color color9 {{color9}};
 @define-color color8-hover rgba({{color8 | rgb}}, 0.3);
@@ -62,7 +63,8 @@
   .notification-content
   .body {
   margin: 0.5rem;
-  color: @color8;
+  color: @color7;
+  opacity: 0.85;
 }
 
 .floating-notifications.background
@@ -208,7 +210,8 @@
   .notification-content
   .body {
   margin: 0.5rem;
-  color: @color8;
+  color: @color7;
+  opacity: 0.85;
 }
 
 .control-center
@@ -306,7 +309,7 @@ trough {
 }
 
 .widget-dnd {
-  color: @color8;
+  color: @color7;
 }
 
 .widget-dnd > switch {

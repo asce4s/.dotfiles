@@ -7,6 +7,7 @@
 @define-color color4 #DF7052;
 @define-color color5 #D49E70;
 @define-color color6 #C0BB57;
+@define-color color7 #EFE5AD;
 @define-color color8 #242426;
 @define-color color9 #2A4145;
 @define-color color8-hover rgba(36,36,38, 0.3);
@@ -62,7 +63,8 @@
   .notification-content
   .body {
   margin: 0.5rem;
-  color: @color8;
+  color: @color7;
+  opacity: 0.85;
 }
 
 .floating-notifications.background
@@ -208,7 +210,8 @@
   .notification-content
   .body {
   margin: 0.5rem;
-  color: @color8;
+  color: @color7;
+  opacity: 0.85;
 }
 
 .control-center
@@ -306,7 +309,7 @@ trough {
 }
 
 .widget-dnd {
-  color: @color8;
+  color: @color7;
 }
 
 .widget-dnd > switch {

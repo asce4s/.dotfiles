@@ -1,5 +1,6 @@
 local config = require("config")
 local mainMod = config.mainMod
+local libDir = config.libDir
 local scriptsDir = config.scriptsDir
 
 -- System
@@ -98,16 +99,16 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("WGPU_BACKEND=gl wallity"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(config.rofiScriptsDir .. "/wallpaper"))
 
 -- Volume / power
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(scriptsDir .. "/Volume.sh --inc"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(scriptsDir .. "/Volume.sh --dec"), { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd(scriptsDir .. "/Volume.sh --toggle-mic"), { locked = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd(scriptsDir .. "/Volume.sh --toggle"), { locked = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("lua " .. libDir .. "/volume_cli.lua --inc"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("lua " .. libDir .. "/volume_cli.lua --dec"), { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("lua " .. libDir .. "/volume_cli.lua --toggle-mic"), { locked = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("lua " .. libDir .. "/volume_cli.lua --toggle"), { locked = true })
 hl.bind("XF86Sleep", hl.dsp.exec_cmd("systemctl suspend"), { locked = true })
 hl.bind("XF86RFKill", hl.dsp.exec_cmd(scriptsDir .. "/AirplaneMode.sh"), { locked = true })
 
 -- Media controls (no XF86AudioPlayPause — not a valid xkbcommon keysym)
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd(scriptsDir .. "/MediaCtrl.sh --pause"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(scriptsDir .. "/MediaCtrl.sh --pause"), { locked = true })
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd(scriptsDir .. "/MediaCtrl.sh --nxt"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(scriptsDir .. "/MediaCtrl.sh --prv"), { locked = true })
-hl.bind("XF86AudioStop", hl.dsp.exec_cmd(scriptsDir .. "/MediaCtrl.sh --stop"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("lua " .. libDir .. "/media_cli.lua --pause"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("lua " .. libDir .. "/media_cli.lua --pause"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("lua " .. libDir .. "/media_cli.lua --nxt"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("lua " .. libDir .. "/media_cli.lua --prv"), { locked = true })
+hl.bind("XF86AudioStop", hl.dsp.exec_cmd("lua " .. libDir .. "/media_cli.lua --stop"), { locked = true })
