@@ -4,6 +4,7 @@ awww img $1 --transition-type random --transition-duration 2
 
 #run wallust
 wallust run --skip-sequences $1
+hyprctl reload
 killall swaync
 swaync &
 

@@ -1,0 +1,7 @@
+require("env")
+require("style")
+require("wallust/wallust-hyprland")
+require("monitor-profile")
+require("rules")
+require("keybinds")
+require("autostart")
