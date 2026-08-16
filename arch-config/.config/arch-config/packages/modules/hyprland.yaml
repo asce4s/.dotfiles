@@ -15,6 +15,7 @@ packages:
   - slurp
   - grim
   - wl-clipboard
+  - cliphist
   - rofi
   - nordzy-hyprcursors
   - wallust-git

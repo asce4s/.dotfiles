@@ -13,6 +13,13 @@ hl.config({
 		layout = "dwindle",
 	},
 
+	master = {
+		mfact = 0.65, -- browser takes 65% of width
+		new_status = "slave", -- new windows go to the stack
+		new_on_top = false,
+		orientation = "left", -- master on left, stack on right
+	},
+
 	scrolling = {
 		fullscreen_on_one_column = true,
 		column_width = 0.7,

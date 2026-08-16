@@ -17,4 +17,5 @@ return {
 		"cust0001:00-04f3:30fa-touchpad",
 		"etps/2-elantech-touchpad",
 	},
+	dropdownClass = "com.supun.dropdown",
 }

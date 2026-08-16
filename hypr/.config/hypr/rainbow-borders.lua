@@ -3,7 +3,7 @@ local config = require("config")
 math.randomseed(os.time())
 
 local function random_color()
-	return string.format("0xff%06x", math.random(0, 0xFFFFFF))
+	return string.format("rgba(%02x%02x%02xff)", math.random(0, 255), math.random(0, 255), math.random(0, 255))
 end
 
 local function apply_rainbow()
@@ -14,7 +14,7 @@ local function apply_rainbow()
 	hl.config({
 		general = {
 			col = {
-				active_border = table.concat(colors, " ") .. " 270deg",
+				active_border = { colors = colors, angle = 270 },
 			},
 		},
 	})

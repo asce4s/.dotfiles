@@ -17,8 +17,9 @@ return {
 	docked = {
 		monitors = {
 			{ output = "eDP-1", disabled = true },
-			{ output = "DP-1", mode = "1920x1080@60.00", position = "0x0", scale = 1 },
-			{ output = "HDMI-A-1", mode = "1920x1080@100.09", position = "1920x0", scale = 1 },
+			{ output = "DP-1", mode = "1920x1080@60.00", position = "0x0", scale = 1, transform = 1 },
+			{ output = "HDMI-A-1", mode = "2560x1440@144.00", position = "1080x95", scale = 1 },
+			-- { output = "HDMI-A-1", mode = "1920x1080@100.09", position = "1920x0", scale = 1 },
 		},
 		workspaces = {
 			{ workspace = "1", monitor = "HDMI-A-1", layout = "master" },
@@ -27,7 +28,7 @@ return {
 			{ workspace = "4", monitor = "HDMI-A-1" },
 			{ workspace = "5", monitor = "HDMI-A-1" },
 			{ workspace = "6", monitor = "HDMI-A-1" },
-			{ workspace = "7", monitor = "DP-1", layout = "scrolling" },
+			{ workspace = "7", monitor = "DP-1", layout = "scrolling", layout_opts = { direction = "down" } },
 			{ workspace = "8", monitor = "DP-1" },
 			{ workspace = "9", monitor = "DP-1" },
 			{ workspace = "10", monitor = "DP-1" },

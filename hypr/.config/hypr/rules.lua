@@ -1,7 +1,10 @@
 -- Window tags
 
 hl.window_rule({ match = { class = "^(zen-alpha|zen)$" }, tag = "+browser" })
-hl.window_rule({ match = { class = "^(swaync-control-center|swaync-notification-window|swaync-client)$" }, tag = "+notif" })
+hl.window_rule({
+	match = { class = "^(swaync-control-center|swaync-notification-window|swaync-client)$" },
+	tag = "+notif",
+})
 hl.window_rule({ match = { class = "^ghostty$" }, tag = "+terminal" })
 hl.window_rule({ match = { class = "^([Tt]hunar)$" }, tag = "+file-manager" })
 hl.window_rule({ match = { class = "^cursor$" }, tag = "+projects" })
@@ -9,14 +12,20 @@ hl.window_rule({ match = { class = "^([Ss]team)$" }, tag = "+gamestore" })
 hl.window_rule({ match = { class = "^(com.obsproject.Studio)$" }, tag = "+screenshare" })
 hl.window_rule({ match = { class = "^(mpv|vlc)$" }, tag = "+multimedia_video" })
 
-hl.window_rule({ match = { class = "^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$" }, tag = "+settings" })
+hl.window_rule({
+	match = { class = "^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$" },
+	tag = "+settings",
+})
 hl.window_rule({ match = { class = "^(qt5ct|qt6ct|[Yy]ad)$" }, tag = "+settings" })
 hl.window_rule({ match = { class = "^(nm-applet|nm-connection-editor|blueman-manager)$" }, tag = "+settings" })
 hl.window_rule({ match = { class = "^(org.kde.polkit-kde-authentication-agent-1)$" }, tag = "+settings" })
 hl.window_rule({ match = { class = "^(file-roller|org.gnome.FileRoller)$" }, tag = "+settings" })
 hl.window_rule({ match = { class = "^(xdg-desktop-portal-gtk)$" }, tag = "+settings" })
 
-hl.window_rule({ match = { class = "^(gnome-system-monitor|org.gnome.SystemMonitor|io.missioncenter.MissionCenter)$" }, tag = "+viewer" })
+hl.window_rule({
+	match = { class = "^(gnome-system-monitor|org.gnome.SystemMonitor|io.missioncenter.MissionCenter)$" },
+	tag = "+viewer",
+})
 
 -- Workspace assignment
 
@@ -34,7 +43,10 @@ hl.window_rule({ match = { class = "^(zen-alpha|zen)$", title = "^Extension:" },
 -- Position and floating
 
 hl.window_rule({ match = { class = "[Tt]hunar", title = "negative:.*[Tt]hunar.*" }, float = true, center = true })
-hl.window_rule({ match = { class = "^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$" }, center = true })
+hl.window_rule({
+	match = { class = "^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$" },
+	center = true,
+})
 
 hl.window_rule({
 	match = { title = "^(Picture-in-Picture)$" },
@@ -91,3 +103,8 @@ hl.window_rule({ match = { tag = "multimedia_video*" }, no_blur = true, opacity 
 
 hl.layer_rule({ match = { namespace = "rofi" }, blur = true, ignore_alpha = 0.5 })
 hl.layer_rule({ match = { namespace = "notifications" }, blur = true, ignore_alpha = 0.5 })
+
+--- Godot rules
+
+hl.window_rule({ match = { class = "^(Godot|godot|org.godotengine.Godot|Godot_Engine)$" }, tag = "+godot" })
+hl.window_rule({ match = { tag = "godot*" }, workspace = "9" })

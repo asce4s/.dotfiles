@@ -164,3 +164,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/supun/.lmstudio/bin"
+# End of LM Studio CLI section
+

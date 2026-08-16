@@ -64,7 +64,7 @@ hl.bind("ALT + F5", hl.dsp.layout("togglefit"))
 -- Common shortcuts
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("pkill rofi || true && uwsm app -- " .. config.rofiScriptsDir .. "/launcher_t1"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd('uwsm app -- xdg-open "https://"'))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("pkill rofi || true && ags -t 'overview'"))
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("pkill rofi || true && " .. config.rofiScriptsDir .. "/cliphist"))
 hl.bind(mainMod .. " + Return", function()
 	hl.dispatch(hl.dsp.exec_cmd("uwsm app -- " .. os.getenv("TERMINAL")))
 end)
@@ -105,6 +105,12 @@ hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("lua " .. libDir .. "/volume_cli.lua
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("lua " .. libDir .. "/volume_cli.lua --toggle"), { locked = true })
 hl.bind("XF86Sleep", hl.dsp.exec_cmd("systemctl suspend"), { locked = true })
 hl.bind("XF86RFKill", hl.dsp.exec_cmd(scriptsDir .. "/AirplaneMode.sh"), { locked = true })
+
+-- Monitor power (DPMS toggle)
+hl.bind(mainMod .. " + ALT + 1", hl.dsp.dpms({ action = "toggle", monitor = "eDP-1" }))
+hl.bind(mainMod .. " + ALT + 2", hl.dsp.dpms({ action = "toggle", monitor = "DP-1" }))
+hl.bind(mainMod .. " + ALT + 3", hl.dsp.dpms({ action = "toggle", monitor = "HDMI-A-1" }))
+hl.bind(mainMod .. " + ALT + 0", hl.dsp.dpms({ action = "toggle" }))
 
 -- Media controls (no XF86AudioPlayPause — not a valid xkbcommon keysym)
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("lua " .. libDir .. "/media_cli.lua --pause"), { locked = true })

@@ -5,11 +5,13 @@ return {
 		config = function()
 			local lint = require("lint")
 
-		-- Define available linters (ESLint handled by LSP)
 		lint.linters_by_ft = {
 			markdown = { "markdownlint" },
 			python = { "pylint" },
-			-- Note: JS/TS linting is handled by ESLint LSP
+			javascript = { "oxlint" },
+			javascriptreact = { "oxlint" },
+			typescript = { "oxlint" },
+			typescriptreact = { "oxlint" },
 		}
 
 		-- Autocmd to run linting

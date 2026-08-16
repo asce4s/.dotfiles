@@ -266,18 +266,10 @@ return {
 			--
 			-- But for many setups, the LSP (`ts_ls`) will work just fine
 			-- ts_ls = {},
-			-- tsgo = {
-			-- 	cmd = { "tsgo", "--lsp", "--stdio" },
-			-- 	filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-			-- 	root_dir = require("lspconfig").util.root_pattern("tsconfig.json", "package.json", ".git"),
-			-- 	settings = {
-			-- 		-- you may add tsgo / typescript-go specific settings here
-			-- 	},
-			-- 	on_attach = function(client, bufnr)
-			-- 		-- your common on_attach stuff (keymaps etc)
-			-- 	end,
-			-- 	capabilities = capabilities,
-			-- },
+
+			-- NOTE: TypeScript 7 (stable, released) is set up below, outside this table.
+			-- It's not a Mason package yet (Mason's `tsgo` package still only tracks the old
+			-- `@typescript/native-preview` nightlies), so it can't be auto-installed/enabled here.
 
 			lua_ls = {
 				-- cmd = { ... },
@@ -341,5 +333,33 @@ return {
 			ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
 			automatic_enable = true,
 		})
+
+		-- TypeScript 7.0 (stable, native Go port) language server.
+		-- Ships in the official `typescript` npm package (binary `tsc`, mode `--lsp --stdio`),
+		-- not through Mason yet, so we wire it up by hand instead of via the `servers` table above.
+		-- Install with: npm install -g typescript  (needs v7+, check with `tsc --version`)
+		vim.lsp.config("tsc", {
+			cmd = function(dispatchers, config)
+				local cmd = "tsc"
+				if (config or {}).root_dir then
+					local local_cmd = vim.fs.joinpath(config.root_dir, "node_modules/.bin", cmd)
+					-- Only use the local tsc if it's v7+ (native tsgo, supports --lsp --stdio).
+					-- Older tsc (v5/v6) doesn't understand --lsp and the client silently fails,
+					-- so fall back to the global v7 binary in that case.
+					if vim.fn.executable(local_cmd) == 1 then
+						local version_out = vim.fn.system({ local_cmd, "--version" })
+						local major = tonumber(version_out:match("Version (%d+)"))
+						if major and major >= 7 then
+							cmd = local_cmd
+						end
+					end
+				end
+				return vim.lsp.rpc.start({ cmd, "--lsp", "--stdio" }, dispatchers)
+			end,
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			root_markers = { "tsconfig.json", "package.json", ".git" },
+			capabilities = capabilities,
+		})
+		vim.lsp.enable("tsc")
 	end,
 }

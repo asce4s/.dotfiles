@@ -33,9 +33,15 @@ return {
 			local has_biome = vim.uv.fs_stat(root_dir .. "/biome.json")
 				or vim.uv.fs_stat(root_dir .. "/biome.jsonc")
 
+			-- Check if oxc (oxfmt/oxlint) config exists
+			local has_oxfmt = vim.uv.fs_stat(root_dir .. "/.oxfmtrc.json")
+				or vim.uv.fs_stat(root_dir .. "/.oxfmtrc.jsonc")
+
 			local formatters
 			if has_biome then
 				formatters = { "biome" }
+			elseif has_oxfmt then
+				formatters = { "oxfmt" }
 			else
 				formatters = { "prettierd", "prettier", stop_after_first = true }
 			end
