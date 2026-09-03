@@ -17,5 +17,11 @@ return {
 		"cust0001:00-04f3:30fa-touchpad",
 		"etps/2-elantech-touchpad",
 	},
+	mice = {
+		"keychron-keychron-q11-mouse",
+		"keychron-keychron-q11-consumer-control-1",
+		"cust0001:00-04f3:30fa-mouse",
+		"mx-ergo-s-mouse",
+	},
 	dropdownClass = "com.supun.dropdown",
 }

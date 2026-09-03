@@ -1,0 +1,238 @@
+#!/usr/bin/env bash
+# Pick a project run target with fzf (npm/bun, cargo, go).
+
+set -euo pipefail
+
+if ! command -v fzf >/dev/null 2>&1; then
+  echo "project-run: fzf not found" >&2
+  exit 1
+fi
+
+find_roots() {
+  local dir="$PWD"
+  npm_root=""
+  cargo_root=""
+  go_root=""
+
+  while [[ -n "$dir" && "$dir" != "/" ]]; do
+    [[ -z "$npm_root" && -f "$dir/package.json" ]] && npm_root="$dir"
+    [[ -z "$cargo_root" && -f "$dir/Cargo.toml" ]] && cargo_root="$dir"
+    [[ -z "$go_root" && -f "$dir/go.mod" ]] && go_root="$dir"
+
+    if [[ "$dir" == "$HOME" || -d "$dir/.git" ]]; then
+      break
+    fi
+    dir="$(dirname "$dir")"
+  done
+}
+
+collect_npm() {
+  local root="$1"
+  python3 - "$root" <<'PY'
+import json, shlex, sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+pkg_path = root / "package.json"
+try:
+    pkg = json.loads(pkg_path.read_text())
+except Exception:
+    sys.exit(0)
+
+scripts = pkg.get("scripts") or {}
+if not isinstance(scripts, dict):
+    sys.exit(0)
+
+priority = ["dev", "start", "run", "serve", "test", "lint", "build"]
+
+def sort_key(name):
+    try:
+        return (0, priority.index(name), name)
+    except ValueError:
+        return (1, 0, name)
+
+for name in sorted(scripts, key=sort_key):
+    body = scripts[name]
+    if not isinstance(body, str):
+        body = str(body)
+    cmd = f"bun run -- {shlex.quote(name)}"
+    print(f"npm\t{name}\t{cmd}\t{root}\t{body}")
+PY
+}
+
+collect_cargo() {
+  local root="$1"
+  if ! command -v cargo >/dev/null 2>&1; then
+    return 0
+  fi
+
+  python3 - "$root" <<'PY'
+import json, subprocess, sys
+from pathlib import Path
+
+root = Path(sys.argv[1]).resolve()
+proc = subprocess.run(
+    [
+        "cargo",
+        "metadata",
+        "--no-deps",
+        "--format-version",
+        "1",
+        "--manifest-path",
+        str(root / "Cargo.toml"),
+    ],
+    capture_output=True,
+    text=True,
+)
+if proc.returncode != 0:
+    sys.exit(0)
+
+try:
+    meta = json.loads(proc.stdout)
+except Exception:
+    sys.exit(0)
+
+manifest = (root / "Cargo.toml").resolve()
+local_pkgs = [p for p in meta.get("packages", []) if p.get("source") is None]
+matched = [p for p in local_pkgs if Path(p["manifest_path"]).resolve() == manifest]
+pkgs = matched or local_pkgs
+multi_pkg = len(pkgs) > 1
+
+def emit(name, cmd, detail):
+    print(f"cargo\t{name}\t{cmd}\t{root}\t{detail}")
+
+def cargo_run(pkg_name, *args):
+    parts = ["cargo", "run"]
+    if multi_pkg:
+        parts += ["-p", pkg_name]
+    parts += list(args)
+    return " ".join(parts)
+
+for pkg in pkgs:
+    bins = [t["name"] for t in pkg.get("targets", []) if "bin" in t.get("kind", [])]
+    examples = [t["name"] for t in pkg.get("targets", []) if "example" in t.get("kind", [])]
+    pkg_name = pkg["name"]
+
+    if len(bins) == 1 and not multi_pkg:
+        emit("run", "cargo run", f"cargo run ({bins[0]})")
+        emit("run --release", "cargo run --release", f"cargo run --release ({bins[0]})")
+    else:
+        for b in bins:
+            label = f"{pkg_name}/{b}" if multi_pkg else b
+            emit(label, cargo_run(pkg_name, "--bin", b), f"bin {b}")
+            emit(f"{label} --release", cargo_run(pkg_name, "--bin", b, "--release"), f"bin {b} (release)")
+
+    for ex in examples:
+        label = f"example:{pkg_name}/{ex}" if multi_pkg else f"example:{ex}"
+        emit(label, cargo_run(pkg_name, "--example", ex), f"example {ex}")
+
+ws = Path(meta.get("workspace_root", root))
+for cfg_name in ("config.toml", "config"):
+    cfg = ws / ".cargo" / cfg_name
+    if not cfg.is_file():
+        continue
+    try:
+        import tomllib
+        data = tomllib.loads(cfg.read_text())
+    except Exception:
+        continue
+    aliases = data.get("alias") or {}
+    if not isinstance(aliases, dict):
+        continue
+    for alias, value in aliases.items():
+        if isinstance(value, list):
+            value = " ".join(str(x) for x in value)
+        emit(f"alias:{alias}", f"cargo {alias}", str(value))
+    break
+PY
+}
+
+collect_go() {
+  local root="$1"
+  python3 - "$root" <<'PY'
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+
+def is_main_pkg(dirpath: Path, max_depth=2) -> bool:
+    if not dirpath.is_dir():
+        return False
+    for go in dirpath.rglob("*.go"):
+        rel = go.relative_to(dirpath)
+        if len(rel.parts) > max_depth:
+            continue
+        if any(p in rel.parts for p in ("testdata", "vendor")) or go.name.endswith("_test.go"):
+            continue
+        try:
+            text = go.read_text(errors="ignore")
+        except OSError:
+            continue
+        for line in text.splitlines():
+            s = line.strip()
+            if s.startswith("package "):
+                return s.split()[1].split("/")[0] == "main"
+            if s and not s.startswith("//"):
+                break
+    return False
+
+def emit(name, cmd, detail):
+    print(f"go\t{name}\t{cmd}\t{root}\t{detail}")
+
+if is_main_pkg(root, max_depth=1):
+    emit("run .", "go run .", "go run .")
+
+cmd_root = root / "cmd"
+if cmd_root.is_dir():
+    for d in sorted(p for p in cmd_root.iterdir() if p.is_dir()):
+        if is_main_pkg(d, max_depth=2):
+            rel = f"./cmd/{d.name}"
+            emit(f"cmd/{d.name}", f"go run {rel}", f"go run {rel}")
+PY
+}
+
+find_roots
+
+rows=""
+if [[ -n "$npm_root" ]]; then
+  rows+=$(collect_npm "$npm_root" || true)
+  rows+=$'\n'
+fi
+if [[ -n "$cargo_root" ]]; then
+  rows+=$(collect_cargo "$cargo_root" || true)
+  rows+=$'\n'
+fi
+if [[ -n "$go_root" ]]; then
+  rows+=$(collect_go "$go_root" || true)
+  rows+=$'\n'
+fi
+
+rows=$(printf '%s' "$rows" | sed '/^$/d')
+
+if [[ -z "$rows" ]]; then
+  echo "project-run: no package.json / Cargo.toml / go.mod (from $PWD up to git root)" >&2
+  exit 1
+fi
+
+# Show kind+name; keep cmd/root/detail in hidden fields.
+selected=$(
+  printf '%s\n' "$rows" | fzf \
+    --height=50% \
+    --reverse \
+    --border \
+    --delimiter=$'\t' \
+    --with-nth=1,2 \
+    --prompt='run> ' \
+    --header='npm = bun run  |  cargo  |  go' \
+    --preview='printf "%s\n\n%s\n" "{3}" "{5}"' \
+    --preview-window='down:4:wrap'
+) || exit 0
+
+[[ -z "$selected" ]] && exit 0
+
+cmd=$(printf '%s' "$selected" | cut -f3)
+root=$(printf '%s' "$selected" | cut -f4)
+
+cd "$root"
+echo "+ $cmd"
+eval "$cmd"

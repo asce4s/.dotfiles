@@ -130,6 +130,7 @@ alias gcb='git checkout -b'
 export PATH="$HOME/.scripts:$PATH"
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^a "tmux-fzf\n"
+bindkey -s ^e "project-run\n"
 source ~/.zsh_plugins.sh
 eval "$(fnm env --use-on-cd --shell zsh)"
 # eval "$(zellij setup --generate-auto-start zsh)"

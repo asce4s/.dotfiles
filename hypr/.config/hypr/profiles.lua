@@ -48,7 +48,7 @@ return {
 		workspaces = allOnMonitor("eDP-1"),
 	},
 
-	external_dp = {
+	external_hdmi = {
 		monitors = {
 			{ output = "eDP-1", disabled = true },
 			{ output = "HDMI-A-1", mode = HDMI_A_1, position = "0x0", scale = 1 },
@@ -57,7 +57,7 @@ return {
 		workspaces = allOnMonitor("HDMI-A-1"),
 	},
 
-	external_hdmi = {
+	external_dp = {
 		monitors = {
 			{ output = "eDP-1", disabled = true },
 			{ output = "HDMI-A-1", disabled = true },
